@@ -36,16 +36,15 @@
                         </thead>
                         <tbody>
                         <!-- Odd row -->
-                        @foreach ($post as $post)
-                        <tr>
+                        <tr v-for="post in posts" :key="post.id"> 
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                               {{$post_name}}
+                              {{post.name}}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                //
+                                {{post.slug}}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                //
+                               {{post.content}}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                 <!-- Publié: bg-indigo-600 | Non publié: bg-gray-200 -->
@@ -60,7 +59,6 @@
                                 <a href="#" class="ml-4 text-indigo-600 hover:text-indigo-900">Supprimer</a>
                             </td>
                         </tr>
-                        @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -74,11 +72,23 @@
     import Welcome from '@/Jetstream/Welcome'
 
     export default {
-        props: ['posts'],
-
+        data(){
+            return{
+                posts: []
+            }
+        },
         components: {
             AppLayout,
             Welcome,
         },
+        methods: {
+            loadPosts() {
+                axios.get('./api/posts')
+                .then(response => this.posts = response.data);
+            }
+        },
+        created(){
+            this.loadPosts();
+        }
     }
 </script>

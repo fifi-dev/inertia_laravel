@@ -17,3 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/posts', function(Request $request) {
+    $fields = $request->get('fields') ? explode('_',$request->get('fields')) :'*';
+    return \App\Models\Post::select($fields)->get();
+});
+
+
+Route::get('/posts/{postId}', function ($courId) {
+    return \App\Models\Post::find($courId);
+});
