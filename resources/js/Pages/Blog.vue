@@ -22,6 +22,7 @@
 
     export default {
         props: ['posts'],
+        
         components: {
             AppLayout,
             Welcome,
