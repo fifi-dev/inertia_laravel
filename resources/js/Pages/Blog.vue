@@ -2,7 +2,7 @@
     <app-layout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Mon Dashboard
+                Blog
             </h2>
         </template>
 
@@ -21,6 +21,7 @@
     import Welcome from '@/Jetstream/Welcome'
 
     export default {
+        props: ['posts'],
         components: {
             AppLayout,
             Welcome,
